@@ -1,8 +1,5 @@
-import { Metadata } from 'next'
+import React from 'react';
 
-export const metadata: Metadata = {
-    title: '[COOPEUCH] Eliminador de Tareas',
-  }
 
   export default function Page() {
     return (
@@ -10,23 +7,16 @@ export const metadata: Metadata = {
         <div>Elimine una tarea COOPEUCH</div>
         <></>
         <div>
-          <Form></Form>
-        </div>
-      </div>
-      )
-  }
-
-  export function Form() {
-    return (
-      <form action="/api/form" method="post">
+        <form method="DELETE" action="http://localhost:8081/task-test-be/task-maintainer/delete-task">
         <div>
-          <label htmlFor="postContent">Identificador de Tarea</label>
-          <input type="text"/>
+          <label>Id Tarea</label>
+          <input type="number" name="taskId" />
         </div>
-    
         <div>
           <button type="submit">Borrar Tarea</button>
         </div>
       </form>
-    )
+        </div>
+      </div>
+      )
   }

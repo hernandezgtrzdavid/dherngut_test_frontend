@@ -1,61 +1,38 @@
-import { Metadata } from 'next'
-import { useId } from 'react';
+import React from 'react';
 
-export const metadata: Metadata = {
-    title: '[COOPEUCH] Editor de Tareas',
-  }
 
   export default function Page() {
     return (
       <div>
-        <div>Edite una tarea COOPEUCH</div>
+        <div>Edite la tarea seleccionada COOPEUCH</div>
         <></>
         <div>
-          <Form></Form>
-          <EditingForm></EditingForm>
+          <form method="POST" action="http://localhost:8081/task-test-be/task-maintainer/save-task">
+          
+            <div>
+              <label>Id Tarea</label>
+              <input type="text" name="taskId" readOnly />
+            </div>
+
+            <div>
+              <label>Descripción de la tarea</label>
+              <textarea name="description" required></textarea>
+            </div>
+            
+            <div>
+              <label>Fecha de creacion</label>
+              <input type="text" name="creationDate" readOnly />
+            </div>
+            
+              <div>
+                <label htmlFor="activeTask">Tarea Vigente</label>
+                <input type="checkbox" id="activeTask" name="activeTask" />
+              </div>
+              <div>
+                <button type="submit">Actualizar Tarea</button>
+              </div>
+          </form>
         </div>
       </div>
       )
-  }
-
-  export function Form() {
-    return (
-      <form action="/api/form" method="post">
-        <div>
-          <label htmlFor="postContent">Identificador de Tarea</label>
-          <input type="text"/>
-        </div>
-    
-        <div>
-          <button type="submit">Cargar Tarea</button>
-        </div>
-      </form>
-    )
-  }
-
-  export function EditingForm() {
-    const postTextAreaId = useId();
-    return (
-      <form action="/api/form" method="post">
-        <div>
-          <>
-          <label htmlFor={postTextAreaId}>Descripción de la tarea</label>
-          <textarea 
-            name="postContent"
-            rows={4}
-            cols={40}
-          />
-          </>
-          
-        </div>
-      
-        <div>
-          <label htmlFor="validTask">Vigente</label>
-          <input type="checkbox" id="validTask" name="validTask" required />
-        </div>
-        <div>
-          <button type="submit">Editar Tarea</button>
-        </div>
-      </form>
-    )
   }
