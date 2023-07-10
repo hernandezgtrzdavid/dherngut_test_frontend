@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { useId } from 'react';
+import { useId, useState } from 'react';
 
 export const metadata: Metadata = {
     title: '[COOPEUCH] Creador de Tareas',
@@ -17,10 +17,36 @@ export default function Page() {
       )
   }
 
-  export function Form() {
+  const [user, setUser] = useState("")
+  const [description, setDescription] = useState("")
+  const [creationDate, setCreationDate] = useState("")
+  const [valid, setValid] = useState("")
+
+  interface  FormDataType {
+    user: string,
+    description: string,
+    creationDate: string,
+    valid: boolean
+  }
+
+
+
+
+  const responseBody: FormDataType = {user: "", description: "", creationDate: "0", valid: false}
+
+  const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    responseBody.user = user
+    responseBody.lastName = lastName
+    responseBody.age = age
+    console.log(JSON.stringify(responseBody))
+    //Form submission happens here
+}
+
+  export function Form() { 
     const postTextAreaId = useId();
     return (
-      <form action="/api/form" method="post">
+      <form onSubmit={onSubmitHandler}>
         <div>
           <>
           <label htmlFor={postTextAreaId}>Descripción de la tarea</label>
